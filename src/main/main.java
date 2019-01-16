@@ -8,239 +8,110 @@ import java.util.Scanner;
 
 public class main {
 
+	@SuppressWarnings("unlikely-arg-type")
 	public static void main(String[] args) throws SQLException {
+		System.out.println("Ola");
 		Locale.setDefault(Locale.US);
 
 		Scanner sc = new Scanner(System.in);
 		DBconnect bd = new DBconnect();
-		String nomeProfessor;
-		Integer auxi;
-		Integer in;
-		String auxS;
-		String auxs;
-		List<String> cursos = bd.getDataCurso();
 
-		String[][] ano = bd.getDataAno();
+		Integer in;
+
+		String[] cursos = bd.getDataCurso();
+
 		String[] nomes = bd.getAllData();
 
-		String sal;
-		String del;
-		Integer im;
-
-		/*
-		 * System.out.println("Desejar Cadastrar?"); sal = sc.nextLine();
-		 * 
-		 * if (sal.equals("s")) { System.out.println("Quantas?"); auxi = sc.nextInt();
-		 * for (i = 1; i <= auxi; i++) {
-		 * 
-		 * System.out.println("Escreva o nome"); auxs = sc.next();
-		 * 
-		 * System.out.println("Escreva a idade"); sc.nextLine(); auxS = sc.nextLine();
-		 * 
-		 * bd.insertData(auxs, auxS); }
-		 * 
-		 * } else { System.out.println("FODASE"); }
-		 * 
-		 * System.out.println("Deseja exluir tudo?"); del = sc.nextLine(); if
-		 * (del.equals("s")) { bd.deleteData("chioda"); bd.deleteData("vitor"); }
-		 * 
-		 * bd.getAllData();
-		 * 
-		 */
-
 		sc.close();
-		String[][] dia = new String[10][8];
+		String[][][] dia = new String[20][10][8];
 		String[] aula = new String[8];
 
-		Integer i;
-		Integer j;
-		i = 0;
-		j = 0;
 		Integer i1;
 		Integer j1;
 		i1 = 0;
 		j1 = 0;
-		String eNome;
-		Integer idn;
+
+		Integer c;
 		Integer ia;
-		Integer ida;
 
-		for (ia = 0; ia < ano[0].length; ia++) {
-			if (ano[0][ia] != null) {
-				// System.out.printf(ano[0][ia]);
-				// System.out.printf(ano[1][ia]);
+		for (ia = 0; ia < cursos.length; ia++) {
+			System.out.println(ia + "s");
 
-				for (in = 0; in < bd.getAllData().length; in++) {
+			for (in = 0; in < bd.getAllData().length; in++) {
 
-					for (j1 = 0; j1 < 8; j1++) {
-						for (i1 = 0; i1 < 5; i1++) {
+				for (j1 = 0; j1 < 8; j1++) {
 
-							String dias = bd.receberDiaSemana(i1);
+					for (i1 = 0; i1 < 5; i1++) {
 
-							String[] dn = bd.getDisponibilidadeAulaByNome(dias, nomes[in]);
+						String dias = bd.receberDiaSemana(i1);
 
-							String[] dd = bd.getDisponibilidadeDiaByNome(dias, nomes[in]);
+						String aulaString = bd.receberAula(j1);
 
-							for (ida = 0; ida < dd.length; ida++) {
-
-								for (idn = 0; idn < dn.length; idn++) {
-
-									if (dn[ida] == null) {
-
-									} else if (dd[ida].equals("segunda")) {
-
-										if (dn[idn] == null) {
-
-										} else {
-
-											if (dn[idn].equals("aula1")) {
-
-												aula[j1] = bd.getData(nomes[in]);
-												dia[0][0] = aula[j1];
-
-											} else if (dn[idn].equals("aula2")) {
-
-												aula[j1] = bd.getData(nomes[in]);
-												dia[0][1] = aula[j1];
-											} else if (dn[idn].equals("aula3")) {
-
-												aula[j1] = bd.getData(nomes[in]);
-												dia[0][2] = aula[j1];
-											} else if (dn[idn].equals("aula4")) {
-
-												aula[j1] = bd.getData(nomes[in]);
-												dia[0][3] = aula[j1];
-											} else if (dn[idn].equals("aula5")) {
-
-												aula[j1] = bd.getData(nomes[in]);
-												dia[0][4] = aula[j1];
-											} else if (dn[idn].equals("aula6")) {
-
-												aula[j1] = bd.getData(nomes[in]);
-												dia[0][5] = aula[j1];
-
-											} else if (dn[idn].equals("aula7")) {
-
-												aula[j1] = bd.getData(nomes[in]);
-												dia[0][6] = aula[j1];
-											} else if (dn[idn].equals("aula8")) {
-
-												aula[j1] = bd.getData(nomes[in]);
-												dia[0][7] = aula[j1];
-											}
-
-										}
-									} else if (dd[ida].equals("terça")) {
-										if (dn[idn] == null) {
-
-										} else {
-											if (dn[idn].equals("aula1")) {
-
-												aula[j1] = bd.getData(nomes[in]);
-												dia[1][0] = aula[j1];
-
-											} else if (dn[idn].equals("aula2")) {
-
-												aula[j1] = bd.getData(nomes[in]);
-												dia[1][1] = aula[j1];
-											} else if (dn[idn].equals("aula3")) {
-
-												aula[j1] = bd.getData(nomes[in]);
-												dia[1][2] = aula[j1];
-
-											} else if (dn[idn].equals("aula4")) {
-
-												aula[j1] = bd.getData(nomes[in]);
-												dia[1][3] = aula[j1];
-											} else if (dn[idn].equals("aula5")) {
-
-												aula[j1] = bd.getData(nomes[in]);
-												dia[1][4] = aula[j1];
-											} else if (dn[idn].equals("aula6")) {
-
-												aula[j1] = bd.getData(nomes[in]);
-												dia[1][5] = aula[j1];
-
-											} else if (dn[idn].equals("aula7")) {
-
-												aula[j1] = bd.getData(nomes[in]);
-												dia[1][6] = aula[j1];
-											} else if (dn[idn].equals("aula8")) {
-
-												aula[j1] = bd.getData(nomes[in]);
-												dia[1][7] = aula[j1];
-											}
-										}
-									} else if (dd[ida].equals("quarta")) {
-										if (dn[idn] == null) {
-
-										} else {
-											if (dn[idn].equals("aula1")) {
-
-												aula[j1] = bd.getData(nomes[in]);
-												dia[2][0] = aula[j1];
-
-											} else if (dn[idn].equals("aula2")) {
-
-												aula[j1] = bd.getData(nomes[in]);
-												dia[2][1] = aula[j1];
-											} else if (dn[idn].equals("aula3")) {
-
-												aula[j1] = bd.getData(nomes[in]);
-												dia[2][2] = aula[j1];
-
-											} else if (dn[idn].equals("aula4")) {
-
-												aula[j1] = bd.getData(nomes[in]);
-												dia[2][3] = aula[j1];
-											} else if (dn[idn].equals("aula5")) {
-
-												aula[j1] = bd.getData(nomes[in]);
-												dia[2][4] = aula[j1];
-											} else if (dn[idn].equals("aula6")) {
-
-												aula[j1] = bd.getData(nomes[in]);
-												dia[2][5] = aula[j1];
-
-											} else if (dn[idn].equals("aula7")) {
-
-												aula[j1] = bd.getData(nomes[in]);
-												dia[2][6] = aula[j1];
-											} else if (dn[idn].equals("aula8")) {
-
-												aula[j1] = bd.getData(nomes[in]);
-												dia[2][7] = aula[j1];
-											}
-										}
-									}
-
-								}
+						String alocarAula = bd.AlocarAula(nomes[in], cursos[ia], dias, aulaString);
+						String verificarAula = bd.verificarAulaPorNome(dias, aulaString, nomes[in], cursos[ia]);
+						if (dia[ia][i1][j1] != null) {
+							if (verificarAula.equals("true")) {
+								dia[ia][i1][j1] = bd.mudarProfessorPorPontos(dia[ia][i1][j1], nomes[in]);
+							} else {
 
 							}
+						} else {
+							dia[ia][i1][j1] = alocarAula;
 						}
-
 					}
 
 				}
 
 			}
 		}
+
 		Integer k;
 		Integer m;
+		Integer cc;
 
-		for (k = 0; k < 8; k++) {
-			for (m = 0; m < 5; m++) {
+		k = 0;
+		m = 0;
+		cc = 0;
 
-				if (dia[m][k] != null) {
-					System.out.printf(" - ");
-					System.out.printf(dia[m][k]);
+		for (cc = 0; cc < cursos.length; cc++) {
+			for (k = 0; k < 8; k++) {
+				for (m = 0; m < 5; m++) {
 
-				} else {
-					System.out.printf(" - ");
-					System.out.printf("Vazio");
+					if (dia[cc][m][k] == null) {
+						dia[cc][m][k] = "vazio";
+					}
+
 				}
+			}
+		}
+
+		k = 0;
+		m = 0;
+		cc = 0;
+
+		for (cc = 0; cc < cursos.length; cc++) {
+			System.out.println(cursos[cc]);
+			for (k = 0; k < 8; k++) {
+				for (m = 0; m < 5; m++) {
+
+					System.out.printf(" - ");
+					System.out.print(dia[cc][m][k]);
+
+				}
+				System.out.println();
 			}
 			System.out.println();
 		}
+
+		c = 0;
+		k = 0;
+
+		for (c = 0; c < cursos.length; c++) {
+			for (k = 0; k < 5; k++) {
+				bd.CadastroAula(k, cursos[c], dia[c][k][0], dia[c][k][1], dia[c][k][2], dia[c][k][3], dia[c][k][4],
+						dia[c][k][5], dia[c][k][6], dia[c][k][7]);
+			}
+		}
+
 	}
 }
